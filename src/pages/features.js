@@ -1,32 +1,47 @@
 // pages/features.js
+import { motion } from 'framer-motion';
 import Link from 'next/link';
 
-export default function Features() {
-  const features = [
-    { title: "Smart Task Categorization", desc: "Organize tasks into categories like Work, Study, Personal." },
-    { title: "Weather Integration", desc: "Plan tasks better with weather-based suggestions." },
-    { title: "AI Task Reprioritization", desc: "Get smart reordering based on urgency and mood." },
-    { title: "Live Productivity Charts", desc: "Visualize your progress and time usage." }
-  ];
-
+export default function FeaturesPage() {
   return (
-    <main className="min-h-screen bg-white px-8 py-16">
-      <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">Key Features</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-        {features.map((feature, idx) => (
-          <div key={idx} className="bg-indigo-50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
-            <h3 className="text-2xl font-semibold text-indigo-700">{feature.title}</h3>
-            <p className="mt-2 text-gray-600">{feature.desc}</p>
-          </div>
-        ))}
-      </div>
-      <div className="mt-12 text-center">
-        <Link href="/get-started">
-          <button className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl transition-all duration-300">
-            Try PlanWise Now
-          </button>
-        </Link>
-      </div>
+    <main className="min-h-screen bg-gray-50 text-gray-800">
+      <nav className="flex justify-between items-center p-6 bg-blue-800 text-white">
+        <div className="text-2xl font-bold">🧠 PlanWise</div>
+        <ul className="flex space-x-6">
+          <li><Link href="/">Home</Link></li>
+          <li><Link href="/features">Features</Link></li>
+          <li><Link href="/get-started">Get Started</Link></li>
+        </ul>
+      </nav>
+
+      <section className="py-12 px-6 text-center">
+        <motion.h2 
+          initial={{ opacity: 0, y: -30 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 0.6 }} 
+          className="text-4xl font-semibold text-blue-700 mb-4">
+          ✨ Key Features
+        </motion.h2>
+
+        <div className="mt-8 grid gap-6 grid-cols-1 md:grid-cols-3">
+          {[
+            { title: "Simple Task Input", desc: "Easily add and manage your daily goals." },
+            { title: "AI-Powered Scheduling", desc: "Intelligently prioritize tasks for max productivity." },
+            { title: "Weather + Calendar Sync", desc: "Smartly adapt to real-world context." },
+          ].map((feature, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: i * 0.2 }}
+              className="bg-white shadow-md p-6 rounded-xl border hover:shadow-xl"
+            >
+              <h3 className="text-xl font-bold text-blue-600 mb-2">{feature.title}</h3>
+              <p className="text-sm text-gray-600">{feature.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
     </main>
   );
 }
